@@ -2,6 +2,7 @@ package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.BuildType
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.ui.*
 
 /*
@@ -12,5 +13,17 @@ in the root project, and delete the patch script.
 create(DslContext.projectId, BuildType({
     id("CsEscaltion")
     name = "CS-Escaltion"
+
+    steps {
+        script {
+            id = "simpleRunner"
+            scriptContent = """
+                echo "Running script from example"
+                matlab -nosplash -noFigureWindows -sd "C:\Users\nbhoski\Documents\example" -batch "ps = parallel.Settings;ps.Pool.PreferredNumWorkers = ${'$'}DEFAULT_JOBS;ps.Pool.AutoCreate = true;\
+                                                                                slbuild('top', 'StandaloneCoderTarget', 'ForceTopModelBuild', true); % do the codegen"
+                echo "complete !"
+            """.trimIndent()
+        }
+    }
 }))
 
