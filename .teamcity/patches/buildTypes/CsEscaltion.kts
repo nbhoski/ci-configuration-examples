@@ -19,8 +19,7 @@ create(DslContext.projectId, BuildType({
             id = "simpleRunner"
             scriptContent = """
                 echo "Running script from example"
-                matlab -nosplash -noFigureWindows -sd "C:\Users\nbhoski\Documents\example" -batch "ps = parallel.Settings;ps.Pool.PreferredNumWorkers = 2;ps.Pool.AutoCreate = true;\
-                                                                                slbuild('top', 'StandaloneCoderTarget', 'ForceTopModelBuild', true); % do the codegen"
+                matlab -nosplash -noFigureWindows -sd "C:\Users\nbhoski\Documents\example" -batch "ps = parallel.Settings;ps.Pool.PreferredNumWorkers = 2;ps.Pool.AutoCreate = true;slbuild('top', 'StandaloneCoderTarget', 'ForceTopModelBuild', true);"
                 echo "complete !"
             """.trimIndent()
         }
